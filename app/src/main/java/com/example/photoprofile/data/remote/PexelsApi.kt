@@ -1,5 +1,6 @@
 package com.example.photoprofile.data.remote
 
+import com.example.photoprofile.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -7,7 +8,7 @@ import retrofit2.http.Headers
 
 interface PexelsApi {
 
-    @Headers("Authorization: YSmZ7az3PyO4TK6bhObwSbBSWB6PSmpRO9GBWM7kuyYXAMOarI98EZdh")
+    @Headers("Authorization: ${BuildConfig.MY_SECRET_API_KEY}")
     @GET("v1/curated")
     suspend fun getPhotos(): PexelsResponse
 

@@ -2,9 +2,10 @@ package com.example.photoprofile.data.local
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+
+
 
 class ProfileDataBase(context: Context) : SQLiteOpenHelper(
     context,
@@ -17,16 +18,26 @@ class ProfileDataBase(context: Context) : SQLiteOpenHelper(
         private const val DATABASE_VERSION = 1
     }
 
+     object UserInfoTable {
+         const val TABLE_NAME = "UserInfo"
+         const val ID = "id"
+         const val NAME = "name"
+         const val EMAIL = "email"
+         const val PHOTO = "photo"
+         const val HOBBIES = "hobbies"
+         const val COUNTRY = "country"
+    }
+
     override fun onCreate(db: SQLiteDatabase) {
 
         val createUserInfoTable = """
-            CREATE TABLE UserInfo (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                email TEXT NOT NULL UNIQUE,
-                photo TEXT,
-                hobbies TEXT,
-                country TEXT
+            CREATE TABLE ${UserInfoTable.TABLE_NAME} (
+                ${UserInfoTable.ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+                ${UserInfoTable.NAME} TEXT NOT NULL,
+                ${UserInfoTable.EMAIL} TEXT NOT NULL UNIQUE,
+                ${UserInfoTable.PHOTO} TEXT,
+                ${UserInfoTable.HOBBIES} TEXT,
+                ${UserInfoTable.COUNTRY} TEXT
                 );
         """.trimIndent()
 
@@ -37,49 +48,48 @@ class ProfileDataBase(context: Context) : SQLiteOpenHelper(
     }
 
     //Insert Query
-    fun insertNewUser(name: String, email: String, photo: String, hobbies: String, country: String): Boolean {
+    fun insertNewUser(insertUser: InsertUserInfo): Boolean {
         val db = writableDatabase
         val cv = ContentValues()
-        cv.put("name", name)
-        cv.put("email", email)
-        cv.put("photo", photo)
-        cv.put("hobbies", hobbies)
-        cv.put("country", country)
+        cv.put(UserInfoTable.NAME, insertUser.name)
+        cv.put(UserInfoTable.EMAIL, insertUser.email)
+        cv.put(UserInfoTable.PHOTO, insertUser.photo)
+        cv.put(UserInfoTable.HOBBIES, insertUser.hobbies)
+        cv.put(UserInfoTable.COUNTRY, insertUser.country)
 
-        return db.insert("UserInfo", null, cv) > 0
+        return db.insert(UserInfoTable.TABLE_NAME, null, cv) > 0
     }
 
     //update Query
-    fun updateUser(id: Int, name: String, email: String, photo: String?, hobbies: String?, country: String?): Boolean {
+    fun updateUser(user: UserInfo): Boolean {
         val db = writableDatabase
         val cv = ContentValues()
-        cv.put("name", name)
-        cv.put("email", email)
-        cv.put("photo", photo)
-        cv.put("hobbies", hobbies)
-        cv.put("country", country)
+        cv.put(UserInfoTable.NAME, user.name)
+        cv.put(UserInfoTable.EMAIL, user.email)
+        cv.put(UserInfoTable.PHOTO, user.photo)
+        cv.put(UserInfoTable.HOBBIES, user.hobbies)
+        cv.put(UserInfoTable.COUNTRY, user.country)
 
-        return db.update("UserInfo", cv, "id = ?", arrayOf(id.toString())) > 0
+        return db.update(UserInfoTable.TABLE_NAME, cv, "${UserInfoTable.ID} = ?", arrayOf(user.id.toString())) > 0
     }
 
     //Select Query
-    fun selectUser(id: Int): UserInfo? {
+    fun selectUser(): UserInfo? {
         val db = readableDatabase
         val cursor = db.rawQuery(
-            "SELECT * FROM UserInfo WHERE id = ?",
-            arrayOf(id.toString())
+            "SELECT * FROM ${UserInfoTable.TABLE_NAME}",null
         )
 
         var user: UserInfo? = null
 
         if (cursor.moveToFirst()) {
             user = UserInfo(
-                id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
-                email = cursor.getString(cursor.getColumnIndexOrThrow("email")),
-                photo = cursor.getString(cursor.getColumnIndexOrThrow("photo")),
-                hobbies = cursor.getString(cursor.getColumnIndexOrThrow("hobbies")),
-                country = cursor.getString(cursor.getColumnIndexOrThrow("country"))
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(UserInfoTable.ID)),
+                name = cursor.getString(cursor.getColumnIndexOrThrow(UserInfoTable.NAME)),
+                email = cursor.getString(cursor.getColumnIndexOrThrow(UserInfoTable.EMAIL)),
+                photo = cursor.getString(cursor.getColumnIndexOrThrow(UserInfoTable.PHOTO)),
+                hobbies = cursor.getString(cursor.getColumnIndexOrThrow(UserInfoTable.HOBBIES)),
+                country = cursor.getString(cursor.getColumnIndexOrThrow(UserInfoTable.COUNTRY))
             )
         }
 
@@ -87,12 +97,4 @@ class ProfileDataBase(context: Context) : SQLiteOpenHelper(
         return user
     }
 
-    data class UserInfo(
-        val id: Int,
-        val name: String,
-        val email: String,
-        val photo: String,
-        val hobbies: String,
-        val country: String
-    )
 }

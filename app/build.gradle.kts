@@ -1,12 +1,26 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+}
+
+val localProperties = Properties().apply {
+    rootProject.file("app/appconfig.properties").inputStream().use { inputStream ->
+        load(inputStream)
+    }
 }
 
 android {
     namespace = "com.example.photoprofile"
     compileSdk {
         version = release(36)
+    }
+
+    buildFeatures {
+        // Enable buildConfig to access the generated field
+        buildConfig = true
     }
 
     defaultConfig {
@@ -17,6 +31,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "MY_SECRET_API_KEY", "${localProperties.getProperty("MY_SECRET_API_KEY")}")
     }
 
     buildTypes {
