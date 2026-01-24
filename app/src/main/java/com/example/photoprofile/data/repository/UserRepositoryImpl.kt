@@ -17,9 +17,9 @@ class UserRepositoryImpl(
             InsertUserInfoDto(
                 name = user.name,
                 email = user.email,
-                photo = user.photo ?: "",
-                hobbies = user.hobbies ?: "",
-                country = user.country ?: ""
+                photo = user.photo,
+                hobbies = user.hobbies,
+                country = user.country
             )
         )
     }
@@ -30,9 +30,9 @@ class UserRepositoryImpl(
                 id = user.id,
                 name = user.name,
                 email = user.email,
-                photo = user.photo ?: "",
-                hobbies = user.hobbies ?: "",
-                country = user.country ?: ""
+                photo = user.photo,
+                hobbies = user.hobbies,
+                country = user.country
             )
         )
     }

@@ -19,7 +19,7 @@ class ProfileDataBase(context: Context) : SQLiteOpenHelper(
     }
 
      object UserInfoTable {
-         const val TABLE_NAME = "UserInfoDto"
+         const val TABLE_NAME = "UserInfo"
          const val ID = "id"
          const val NAME = "name"
          const val EMAIL = "email"
