@@ -10,7 +10,7 @@ interface PexelsApi {
 
     @Headers("Authorization: ${BuildConfig.MY_SECRET_API_KEY}")
     @GET("v1/curated")
-    suspend fun getPhotos(): PexelsResponse
+    suspend fun getPhotos(): PexelsResponseDto
 
 }
 

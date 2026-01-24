@@ -1,7 +1,7 @@
 package com.example.photoprofile.data.local
 
 
-open class InsertUserInfo(
+open class InsertUserInfoDto(
     val name: String,
     val email: String,
     val photo: String,
@@ -9,11 +9,11 @@ open class InsertUserInfo(
     val country: String
 )
 
-class UserInfo(
+class UserInfoDto(
      val id: Int,
      name: String,
      email: String,
      photo: String,
      hobbies: String,
-     country: String) : InsertUserInfo(name, email, photo, hobbies, country )
+     country: String) : InsertUserInfoDto(name, email, photo, hobbies, country )
 
