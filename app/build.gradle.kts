@@ -1,12 +1,26 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+}
+
+val localProperties = Properties().apply {
+    rootProject.file("app/appconfig.properties").inputStream().use { inputStream ->
+        load(inputStream)
+    }
 }
 
 android {
     namespace = "com.example.photoprofile"
     compileSdk {
         version = release(36)
+    }
+
+    buildFeatures {
+        // Enable buildConfig to access the generated field
+        buildConfig = true
     }
 
     defaultConfig {
@@ -17,6 +31,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "MY_SECRET_API_KEY", "${localProperties.getProperty("MY_SECRET_API_KEY")}")
     }
 
     buildTypes {
@@ -46,4 +62,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Api
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }
