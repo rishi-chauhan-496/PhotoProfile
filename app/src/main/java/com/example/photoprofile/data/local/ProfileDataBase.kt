@@ -14,12 +14,12 @@ class ProfileDataBase(context: Context) : SQLiteOpenHelper(
     DATABASE_VERSION
 ) {
     companion object {
-        private const val DATABASE_NAME = "User.db"
+        private const val DATABASE_NAME = "UserInfo.db"
         private const val DATABASE_VERSION = 1
     }
 
      object UserInfoTable {
-         const val TABLE_NAME = "UserInfo"
+         const val TABLE_NAME = "UserInfoDto"
          const val ID = "id"
          const val NAME = "name"
          const val EMAIL = "email"
@@ -48,7 +48,7 @@ class ProfileDataBase(context: Context) : SQLiteOpenHelper(
     }
 
     //Insert Query
-    fun insertNewUser(insertUser: InsertUserInfo): Boolean {
+    fun insertNewUser(insertUser: InsertUserInfoDto): Boolean {
         val db = writableDatabase
         val cv = ContentValues()
         cv.put(UserInfoTable.NAME, insertUser.name)
@@ -61,7 +61,7 @@ class ProfileDataBase(context: Context) : SQLiteOpenHelper(
     }
 
     //update Query
-    fun updateUser(user: UserInfo): Boolean {
+    fun updateUser(user: UserInfoDto): Boolean {
         val db = writableDatabase
         val cv = ContentValues()
         cv.put(UserInfoTable.NAME, user.name)
@@ -74,16 +74,16 @@ class ProfileDataBase(context: Context) : SQLiteOpenHelper(
     }
 
     //Select Query
-    fun selectUser(): UserInfo? {
+    fun selectUser(): UserInfoDto? {
         val db = readableDatabase
         val cursor = db.rawQuery(
             "SELECT * FROM ${UserInfoTable.TABLE_NAME}",null
         )
 
-        var user: UserInfo? = null
+        var user: UserInfoDto? = null
 
         if (cursor.moveToFirst()) {
-            user = UserInfo(
+            user = UserInfoDto(
                 id = cursor.getInt(cursor.getColumnIndexOrThrow(UserInfoTable.ID)),
                 name = cursor.getString(cursor.getColumnIndexOrThrow(UserInfoTable.NAME)),
                 email = cursor.getString(cursor.getColumnIndexOrThrow(UserInfoTable.EMAIL)),

@@ -1,12 +1,12 @@
 package com.example.photoprofile.data.remote
 
-data class PexelsResponse(
+data class PexelsResponseDto(
     val page: Int,
     val perPage: Int,
-    val photos: List<Photo>,
+    val photos: List<PhotoDto>,
     val nextPage: String?
 )
-data class Photo(
+data class PhotoDto(
     val id: Long,
     val width: Int,
     val height: Int,
@@ -15,13 +15,13 @@ data class Photo(
     val photographerUrl: String,
     val photographerId: Long,
     val avgColor: String,
-    val src: Src,
+    val src: SrcDto,
     val liked: Boolean,
     val alt: String
 )
 
 
-data class Src(
+data class SrcDto(
     val original: String,
     val large2x: String,
     val large: String,
