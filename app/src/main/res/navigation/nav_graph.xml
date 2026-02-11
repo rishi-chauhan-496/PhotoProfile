@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/photosFragment">
+
+    <fragment
+        android:id="@+id/photosFragment"
+        android:name="com.example.photoprofile.PhotosFragment"
+        android:label="Photos">
+
+        <action
+            android:id="@+id/action_photos_to_photoDownload"
+            app:destination="@id/photoDownloadFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.photoprofile.ProfileFragment"
+        android:label="Profile">
+
+        <action
+            android:id="@+id/action_profile_to_profileEdit"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="com.example.photoprofile.ProfileEditFragment"
+        android:label="Edit Profile" />
+
+    <fragment
+        android:id="@+id/photoDownloadFragment"
+        android:name="com.example.photoprofile.PhotoDownloadFragment"
+        android:label="Download Photo" />
+
+</navigation>

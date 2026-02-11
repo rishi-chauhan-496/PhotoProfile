@@ -2,7 +2,6 @@ package com.example.photoprofile.ui.viewmodel
 
 
 import androidx.lifecycle.ViewModel
-import com.example.photoprofile.ui.dataclass.PhotoUi
 import com.example.photoprofile.ui.uistate.PhotoDetailUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

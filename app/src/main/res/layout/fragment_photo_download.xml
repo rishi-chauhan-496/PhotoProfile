@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="38dp"
+    tools:context=".PhotoDownloadFragment">
+
+    <ImageView
+        android:layout_width="330dp"
+        android:layout_height="425dp"
+        android:contentDescription="@string/photo"
+        android:layout_marginTop="60dp"/>
+
+    <Button
+        android:id="@+id/buttonDownload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/download"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="510dp"/>
+
+</FrameLayout>

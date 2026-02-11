@@ -1,16 +1,11 @@
 package com.example.photoprofile.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.photoprofile.domain.model.InsertUserInfo
 import com.example.photoprofile.domain.model.UserInfo
-import com.example.photoprofile.domain.usecase.GetUserUseCase
 import com.example.photoprofile.domain.usecase.SaveUserUseCase
 import com.example.photoprofile.domain.usecase.UpdateUserUseCase
-import com.example.photoprofile.ui.dataclass.InsertUserInfoUi
-import com.example.photoprofile.ui.dataclass.map.toUi
 import com.example.photoprofile.ui.uistate.UserUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
