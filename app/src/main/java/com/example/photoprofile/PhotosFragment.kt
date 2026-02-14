@@ -1,59 +1,111 @@
 package com.example.photoprofile
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.photoprofile.ui.adapter.ImageAdapter
+import com.example.photoprofile.ui.viewmodel.PhotosViewModel
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.getValue
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PhotosFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PhotosFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel: PhotosViewModel by viewModel()
+    lateinit var recyclerView: RecyclerView
+    lateinit var progressBar: ProgressBar
+    private lateinit var adapter: ImageAdapter
+    private lateinit var layoutManager: StaggeredGridLayoutManager
+    private var isLoading = false
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_photos, container, false)
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_photos, container, false)
+
+        recyclerView = view.findViewById(R.id.recyclerView)
+        progressBar = view.findViewById(R.id.progressBar)
+
+        recyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        setupRecyclerView()
+        observeUiState()
+
+        viewModel.loadPhotos()
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PhotosFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PhotosFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun setupRecyclerView() {
+
+        layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        recyclerView.layoutManager = layoutManager
+
+        adapter = ImageAdapter()
+        recyclerView.adapter = adapter
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(
+                recyclerView: RecyclerView,
+                dx: Int,
+                dy: Int
+            ) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy <= 0) return // ignore scroll up
+
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItems =
+                    layoutManager.findFirstVisibleItemPositions(null)
+
+                val firstVisibleItem =
+                    firstVisibleItems.minOrNull() ?: 0
+
+                if (!isLoading && (visibleItemCount + firstVisibleItem) >= totalItemCount - 4
+                ) {
+                    isLoading = true
+                    viewModel.loadPhotos()
+                }
+
+            }
+        })
+    }
+
+    private fun observeUiState() {
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                viewModel.uiState.collect { state ->
+
+                    progressBar.visibility =
+                        if (state.isLoading) View.VISIBLE else View.GONE
+
+                    Log.d("main","${state.page}")
+                    Log.d("main","${state.perPage}")
+                    Log.d("main","${state.nextPage}")
+                    adapter.setPhotos(state.photos)
+                    isLoading = false
+
                 }
             }
+        }
     }
 }

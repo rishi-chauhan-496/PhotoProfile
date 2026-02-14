@@ -10,9 +10,9 @@ import com.example.photoprofile.R
 import com.example.photoprofile.ui.dataclass.PhotoUi
 
 
-class ImageAdapter(
-    private val list: List<PhotoUi>
-) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+class ImageAdapter() : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+
+    private val list = mutableListOf<PhotoUi>()
 
     class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.imgItem)
@@ -26,9 +26,15 @@ class ImageAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         Glide.with(holder.image.context)
-            .load(list[position].src.small)
+            .load(list[position].src.portrait)
             .into(holder.image)
     }
 
     override fun getItemCount(): Int = list.size
+
+    fun setPhotos(newPhotos: List<PhotoUi>) {
+        list.clear()
+        list.addAll(newPhotos)
+        notifyDataSetChanged()
+    }
 }

@@ -4,14 +4,17 @@ import com.example.photoprofile.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Headers
+import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface PexelsApi {
 
-    @Headers("Authorization: ${BuildConfig.MY_SECRET_API_KEY}")
     @GET("v1/curated")
-    suspend fun getPhotos(): PexelsResponseDto
-
+    suspend fun getPhotos(
+        @Header("Authorization") apiKey: String = BuildConfig.MY_SECRET_API_KEY,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int = 20
+    ): PexelsResponseDto
 }
 
 object RetrofitInstance {

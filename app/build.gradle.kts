@@ -82,7 +82,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Api
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     // Image
@@ -94,6 +93,10 @@ dependencies {
     //Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    // Koin for Kotlin apps
+    implementation("io.insert-koin:koin-core:3.5.6")
+    implementation("io.insert-koin:koin-android:3.5.6")
+
     // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

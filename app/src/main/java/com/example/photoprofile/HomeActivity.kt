@@ -1,18 +1,17 @@
 package com.example.photoprofile
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
-
-    lateinit var buttonPhotos: Button
-    lateinit var buttonProfile: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,19 +27,16 @@ class HomeActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         val navController = navHostFragment.navController
+
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         setupActionBarWithNavController(navController)
 
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
-        buttonPhotos = findViewById(R.id.buttonPhotos)
-        buttonProfile = findViewById(R.id.buttonProfile)
+        bottomNav.setupWithNavController(navController)
 
-        buttonPhotos.setOnClickListener {
-            navController.navigate(R.id.photosFragment)
-        }
-
-        buttonProfile.setOnClickListener {
-            navController.navigate(R.id.profileFragment)
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

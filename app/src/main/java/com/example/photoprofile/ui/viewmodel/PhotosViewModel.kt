@@ -16,25 +16,45 @@ class PhotosViewModel(
     private val _uiState = MutableStateFlow(PhotosUiState())
     val uiState: StateFlow<PhotosUiState> = _uiState
 
+
+    private var currentPage = 1
+    private var isLoadingMore = false
+    private var isLastPage = false
+
+
     fun loadPhotos() {
 
-        _uiState.value = _uiState.value.copy(
-            isLoading = true
-        )
+        if (isLoadingMore || isLastPage) return
+            isLoadingMore = true
+
+        _uiState.value = _uiState.value.copy(isLoading = currentPage == 1)
 
         viewModelScope.launch {
             try {
-                val response = getCuratedPhotosUseCase()
+                val response = getCuratedPhotosUseCase(currentPage)
+
+                val uiResponse = response.toUi()
+
+                if (uiResponse.nextPage == null) {
+                    isLastPage = true
+                } else {
+                    currentPage++
+                }
+
                 _uiState.value = _uiState.value.copy(
-                        photos = response.toUi().photos,
-                        isLoading = false
-                    )
+                    photos = _uiState.value.photos + uiResponse.photos,
+                    page = uiResponse.page,
+                    perPage = uiResponse.perPage,
+                    nextPage = uiResponse.nextPage,
+                    isLoading = false
+                )
 
             } catch (e: Exception) {
-                _uiState.value = PhotosUiState(
+                _uiState.value = _uiState.value.copy(
                     error = e.message
                 )
             }
+            isLoadingMore = false
         }
     }
 }

@@ -13,9 +13,9 @@ data class PhotoUi(
     val height: Int,
     val url: String,
     val photographer: String,
-    val photographerUrl: String,
+    val photographerUrl: String?,
     val photographerId: Long,
-    val avgColor: String,
+    val avgColor: String?,
     val src: SrcUi,
     val liked: Boolean,
     val alt: String

@@ -20,4 +20,8 @@
     <string name="coding">Coding</string>
     <string name="gaming">Gaming</string>
     <string name="image">image</string>
+    <string name="profile_header">Profile</string>
+    <string name="edit_profile_header">Edit Profile</string>
+    <string name="record_inserted">Record Inserted</string>
+    <string name="special">Special</string>
 </resources>

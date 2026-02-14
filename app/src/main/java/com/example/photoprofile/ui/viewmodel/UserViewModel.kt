@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class UserViewModel(
-private val saveUserUseCase: SaveUserUseCase,
-private val updateUserUseCase: UpdateUserUseCase
+    private val saveUserUseCase: SaveUserUseCase,
+    private val updateUserUseCase: UpdateUserUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UserUiState())
