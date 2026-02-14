@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">PhotoProfile</string>
+    <string name="con">Continue</string>
+    <string name="photos">Photos</string>
+    <string name="profile">Profile</string>
+    <string name="profileBold">PROFILE</string>
+    <string name="name">Name</string>
+    <string name="country">Country</string>
+    <string name="dp">profilePhoto</string>
+    <string name="email">Email</string>
+    <string name="hobbies">Hobbies</string>
+    <string name="edit">Edit</string>
+    <string name="photo">photo</string>
+    <string name="download">Download</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="pick_image">Pick image</string>
+    <string name="insert">Insert</string>
+    <string name="update">Update</string>
+    <string name="reading">Reading</string>
+    <string name="coding">Coding</string>
+    <string name="gaming">Gaming</string>
+    <string name="image">image</string>
 </resources>
