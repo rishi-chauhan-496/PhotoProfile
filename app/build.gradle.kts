@@ -4,6 +4,7 @@ import java.io.FileInputStream
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 val localProperties = Properties().apply {
@@ -96,7 +97,6 @@ dependencies {
     // Koin for Kotlin apps
     implementation("io.insert-koin:koin-core:3.5.6")
     implementation("io.insert-koin:koin-android:3.5.6")
-
     // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

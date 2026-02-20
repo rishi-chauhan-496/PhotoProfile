@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/imgItem"
-        android:layout_width="280dp"
-        android:layout_height="420dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/image"
         android:scaleType="centerCrop"/>

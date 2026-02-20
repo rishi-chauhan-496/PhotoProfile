@@ -44,7 +44,7 @@ class PhotosFragment : Fragment() {
         setupRecyclerView()
         observeUiState()
 
-        viewModel.loadPhotos()
+//        viewModel.loadPhotos()
 
         return view
     }

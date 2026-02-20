@@ -19,7 +19,7 @@ class IntroActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<Button>(R.id.buttoncontinue).setOnClickListener {
+        findViewById<Button>(R.id.buttonContinue).setOnClickListener {
             val intent = Intent(this@IntroActivity, HomeActivity::class.java)
             startActivity(intent)
         }

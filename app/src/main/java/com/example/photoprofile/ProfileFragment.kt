@@ -32,10 +32,9 @@ class ProfileFragment : Fragment() {
     lateinit var textEmail: TextView
     lateinit var textHobbies: TextView
     lateinit var imageView: ImageView
-    lateinit var textName1: TextView
-    lateinit var textCountry1: TextView
-    lateinit var textEmail1: TextView
-    lateinit var textHobbies1: TextView
+    lateinit var layoutEmpty: View
+    lateinit var layoutProfile: View
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,24 +43,23 @@ class ProfileFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        view.findViewById<Button>(R.id.buttonEdit).setOnClickListener {
-            findNavController().navigate(
-                R.id.action_profile_to_profileEdit
-            )
-        }
-
         textHeader = view.findViewById(R.id.textHeader)
         textName = view.findViewById(R.id.textViewName)
         textCountry = view.findViewById(R.id.textViewCountry)
         textEmail = view.findViewById(R.id.textViewEmail)
         textHobbies = view.findViewById(R.id.textViewHobbies)
         imageView = view.findViewById(R.id.imageView)
-        textName1 = view.findViewById(R.id.textViewName1)
-        textCountry1 = view.findViewById(R.id.textViewCountry1)
-        textEmail1 = view.findViewById(R.id.textViewEmail1)
-        textHobbies1 = view.findViewById(R.id.textViewHobbies1)
+        layoutEmpty = view.findViewById(R.id.layoutEmpty)
+        layoutProfile = view.findViewById(R.id.layoutProfile)
+
 
         dataSetUp()
+
+        view.findViewById<Button>(R.id.buttonCreateProfile).setOnClickListener {
+            findNavController().navigate(
+                R.id.action_profile_to_profileEdit
+            )
+        }
 
         return view
     }
@@ -79,24 +77,13 @@ class ProfileFragment : Fragment() {
 
                     if (state.user == null) {
 
-                        textHeader.text = getString(R.string.edit_profile_header)
-
-                        textName1.visibility = View.GONE
-                        textCountry1.visibility = View.GONE
-                        textEmail1.visibility = View.GONE
-                        textHobbies1.visibility = View.GONE
-                        imageView.visibility = View.GONE
+                        layoutEmpty.visibility = View.VISIBLE
+                        layoutProfile.visibility = View.GONE
 
                     } else {
 
-                        textHeader.text = getString(R.string.profile_header)
-
-                        textName1.visibility = View.VISIBLE
-                        textCountry1.visibility = View.VISIBLE
-                        textEmail1.visibility = View.VISIBLE
-                        textHobbies1.visibility = View.VISIBLE
-                        imageView.visibility = View.VISIBLE
-
+                        layoutEmpty.visibility = View.GONE
+                        layoutProfile.visibility = View.VISIBLE
 
                         textName.text = state.user.name
                         textCountry.text = state.user.country

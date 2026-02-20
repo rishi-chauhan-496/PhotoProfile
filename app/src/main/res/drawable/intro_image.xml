@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Back Card -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M40,60 h100 a12,12 0 0 1 12,12 v70 a12,12 0 0 1 -12,12 h-100 a12,12 0 0 1 -12,-12 v-70 a12,12 0 0 1 12,-12 z"/>
+
+    <!-- Middle Card -->
+    <path
+        android:fillColor="#B39DDB"
+        android:pathData="M55,45 h100 a12,12 0 0 1 12,12 v70 a12,12 0 0 1 -12,12 h-100 a12,12 0 0 1 -12,-12 v-70 a12,12 0 0 1 12,-12 z"/>
+
+    <!-- Front Card -->
+    <path
+        android:fillColor="#6750A4"
+        android:pathData="M70,30 h100 a12,12 0 0 1 12,12 v70 a12,12 0 0 1 -12,12 h-100 a12,12 0 0 1 -12,-12 v-70 a12,12 0 0 1 12,-12 z"/>
+
+    <!-- Small Sun Circle -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M150,55 m-8,0 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0"/>
+
+</vector>
