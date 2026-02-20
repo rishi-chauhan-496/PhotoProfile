@@ -27,15 +27,21 @@
     <fragment
         android:id="@+id/profileEditFragment"
         android:name="com.example.photoprofile.ProfileEditFragment"
-        android:label="Edit Profile" >
+        android:label="Edit Profile">
+
         <action
             android:id="@+id/action_profileEdit_to_profile"
-            app:destination="@+id/profileFragment"/>
+            app:destination="@+id/profileFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/photoDownloadFragment"
         android:name="com.example.photoprofile.PhotoDownloadFragment"
-        android:label="Download Photo" />
+        android:label="Download Photo">
+
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

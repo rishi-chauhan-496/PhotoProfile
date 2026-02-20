@@ -10,7 +10,9 @@ import com.example.photoprofile.R
 import com.example.photoprofile.ui.dataclass.PhotoUi
 
 
-class ImageAdapter() : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+class ImageAdapter(
+    private val onItemClick: (String) -> Unit
+) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     private val list = mutableListOf<PhotoUi>()
 
@@ -28,6 +30,10 @@ class ImageAdapter() : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
         Glide.with(holder.image.context)
             .load(list[position].src.portrait)
             .into(holder.image)
+
+        holder.itemView.setOnClickListener {
+            onItemClick(list[position].src.large)
+        }
     }
 
     override fun getItemCount(): Int = list.size

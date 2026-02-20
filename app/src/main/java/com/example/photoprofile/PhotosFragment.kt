@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.photoprofile.ui.adapter.ImageAdapter
@@ -44,7 +45,7 @@ class PhotosFragment : Fragment() {
         setupRecyclerView()
         observeUiState()
 
-//        viewModel.loadPhotos()
+        viewModel.loadPhotos()
 
         return view
     }
@@ -56,7 +57,14 @@ class PhotosFragment : Fragment() {
 
         recyclerView.layoutManager = layoutManager
 
-        adapter = ImageAdapter()
+        adapter = ImageAdapter { imageUrl ->
+
+            val action =
+                PhotosFragmentDirections
+                    .actionPhotosToPhotoDownload(imageUrl)
+
+            findNavController().navigate(action)
+        }
         recyclerView.adapter = adapter
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
