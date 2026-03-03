@@ -11,7 +11,7 @@ import com.example.photoprofile.ui.dataclass.PhotoUi
 
 
 class ImageAdapter(
-    private val onItemClick: (String) -> Unit
+    private val onItemClick: (String,Long) -> Unit
 ) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     private val list = mutableListOf<PhotoUi>()
@@ -32,7 +32,8 @@ class ImageAdapter(
             .into(holder.image)
 
         holder.itemView.setOnClickListener {
-            onItemClick(list[position].src.large)
+            onItemClick(list[position].src.large,list[position].id)
+
         }
     }
 

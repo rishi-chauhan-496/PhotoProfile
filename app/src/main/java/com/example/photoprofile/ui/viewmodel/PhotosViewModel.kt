@@ -24,9 +24,6 @@ class PhotosViewModel(
 
     fun loadPhotos() {
 
-        if (isLoadingMore || isLastPage) return
-            isLoadingMore = true
-
         _uiState.value = _uiState.value.copy(isLoading = currentPage == 1)
 
         viewModelScope.launch {

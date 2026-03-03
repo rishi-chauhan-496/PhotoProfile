@@ -27,4 +27,7 @@
     <string name="get_started">Get Started</string>
     <string name="explore_and_download_beautiful_photos">Explore and download beautiful photos</string>
     <string name="welcome_to_photoprofile">Welcome to PhotoProfile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="full_image">Full Image</string>
 </resources>

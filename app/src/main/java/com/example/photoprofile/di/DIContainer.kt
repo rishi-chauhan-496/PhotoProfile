@@ -2,6 +2,7 @@ package com.example.photoprofile.di
 
 import com.example.photoprofile.MainApplication
 import com.example.photoprofile.data.local.ProfileDataBase
+import com.example.photoprofile.ImageDownloadRepository
 import com.example.photoprofile.data.repository.PexelsRepositoryImpl
 import com.example.photoprofile.data.repository.UserRepositoryImpl
 import com.example.photoprofile.domain.repository.PexelsRepository
@@ -10,6 +11,7 @@ import com.example.photoprofile.domain.usecase.GetCuratedPhotosUseCase
 import com.example.photoprofile.domain.usecase.GetUserUseCase
 import com.example.photoprofile.domain.usecase.SaveUserUseCase
 import com.example.photoprofile.domain.usecase.UpdateUserUseCase
+import com.example.photoprofile.ui.viewmodel.PhotoDetailViewModel
 //import com.example.photoprofile.ui.viewmodel.PhotoDetailViewModel
 import com.example.photoprofile.ui.viewmodel.PhotosViewModel
 import com.example.photoprofile.ui.viewmodel.UserInfoViewModel
@@ -81,6 +83,15 @@ object DIContainer {
             UserViewModel(
                 saveUserUseCase = get(),
                 updateUserUseCase = get()
+            )
+        }
+        //
+        single<ImageDownloadRepository> {
+            ImageDownloadRepository()
+        }
+        viewModel<PhotoDetailViewModel> {
+            PhotoDetailViewModel(
+                repository = get()
             )
         }
     }

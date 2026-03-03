@@ -42,6 +42,26 @@
         <argument
             android:name="imageUrl"
             app:argType="string" />
+
+        <argument
+            android:name="imageId"
+            app:argType="long"/>
+
+        <action
+            android:id="@+id/action_photoDownload_to_fullScreen"
+            app:destination="@id/fullScreenImageFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fullScreenImageFragment"
+        android:name="com.example.photoprofile.FullScreenImageFragment"
+        android:label="Full Image">
+
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+
     </fragment>
 
 </navigation>

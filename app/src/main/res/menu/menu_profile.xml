@@ -5,6 +5,6 @@
     <item
         android:id="@+id/action_special"
         android:title="@string/special"
-        android:icon="@drawable/pencil"
+        android:icon="@drawable/img"
         app:showAsAction="always" />
 </menu>

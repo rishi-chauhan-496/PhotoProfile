@@ -57,11 +57,11 @@ class PhotosFragment : Fragment() {
 
         recyclerView.layoutManager = layoutManager
 
-        adapter = ImageAdapter { imageUrl ->
+        adapter = ImageAdapter { imageUrl,imageId ->
 
             val action =
                 PhotosFragmentDirections
-                    .actionPhotosToPhotoDownload(imageUrl)
+                    .actionPhotosToPhotoDownload(imageUrl,imageId)
 
             findNavController().navigate(action)
         }
@@ -109,6 +109,7 @@ class PhotosFragment : Fragment() {
                     Log.d("main","${state.page}")
                     Log.d("main","${state.perPage}")
                     Log.d("main","${state.nextPage}")
+                    Log.d("main","${state.photos}")
                     adapter.setPhotos(state.photos)
                     isLoading = false
 
