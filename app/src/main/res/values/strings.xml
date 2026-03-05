@@ -30,4 +30,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="full_image">Full Image</string>
+    <string name="original">Original</string>
+    <string name="large">Large</string>
+    <string name="large2x">large2X</string>
+    <string name="medium">Medium</string>
+    <string name="small">Small</string>
+    <string name="portrait">portrait</string>
+    <string name="landscape">landscape</string>
+    <string name="tiny">tiny</string>
+    <string name="storage">Storage</string>
 </resources>

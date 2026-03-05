@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/StorageFragment"
+        android:icon="@drawable/storage"
+        android:title="@string/storage" />
+
+    <item
         android:id="@+id/photosFragment"
         android:icon="@drawable/ic_photos"
         android:title="@string/photos" />

@@ -17,7 +17,7 @@ class PhotoDetailViewModel(
     private val _uiState = MutableStateFlow(PhotoDetailUiState())
     val uiState: StateFlow<PhotoDetailUiState> = _uiState
 
-    fun downloadPhoto(context: Context, imageUrl: String,imageId: Long) {
+    fun downloadPhoto(context: Context, imageUrl: String,imageId: Long,imageType: String) {
 
         viewModelScope.launch {
 
@@ -29,7 +29,8 @@ class PhotoDetailViewModel(
             val success = repository.downloadAndSaveImage(
                 context,
                 imageUrl,
-                imageId
+                imageId,
+                imageType
             )
 
             _uiState.value = _uiState.value.copy(

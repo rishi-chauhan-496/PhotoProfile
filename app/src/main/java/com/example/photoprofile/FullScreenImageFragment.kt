@@ -66,7 +66,7 @@ class FullScreenImageFragment :
         WindowInsetsControllerCompat(window, window.decorView)
             .show(WindowInsetsCompat.Type.systemBars())
 
-        (requireActivity() as? androidx.appcompat.app.AppCompatActivity)
+        (requireActivity() as? AppCompatActivity)
             ?.supportActionBar?.show()
     }
 }

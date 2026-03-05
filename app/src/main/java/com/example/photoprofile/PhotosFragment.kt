@@ -27,6 +27,7 @@ class PhotosFragment : Fragment() {
     private lateinit var adapter: ImageAdapter
     private lateinit var layoutManager: StaggeredGridLayoutManager
     private var isLoading = false
+    private var isLastPage = false
 
 
     override fun onCreateView(
@@ -39,8 +40,9 @@ class PhotosFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         progressBar = view.findViewById(R.id.progressBar)
 
-        recyclerView.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        recyclerView.layoutManager = layoutManager
 
         setupRecyclerView()
         observeUiState()
@@ -52,16 +54,11 @@ class PhotosFragment : Fragment() {
 
     private fun setupRecyclerView() {
 
-        layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
-        recyclerView.layoutManager = layoutManager
-
-        adapter = ImageAdapter { imageUrl,imageId ->
+        adapter = ImageAdapter { imageSrc,imageId ->
 
             val action =
                 PhotosFragmentDirections
-                    .actionPhotosToPhotoDownload(imageUrl,imageId)
+                    .actionPhotosToPhotoDownload(imageSrc,imageId)
 
             findNavController().navigate(action)
         }
@@ -86,8 +83,12 @@ class PhotosFragment : Fragment() {
                 val firstVisibleItem =
                     firstVisibleItems.minOrNull() ?: 0
 
-                if (!isLoading && (visibleItemCount + firstVisibleItem) >= totalItemCount - 4
-                ) {
+                val shouldLoadMore =
+                    !isLoading &&
+                            !isLastPage &&
+                            (visibleItemCount + firstVisibleItem >= totalItemCount - 5)
+
+                if (shouldLoadMore) {
                     isLoading = true
                     viewModel.loadPhotos()
                 }
@@ -110,8 +111,9 @@ class PhotosFragment : Fragment() {
                     Log.d("main","${state.perPage}")
                     Log.d("main","${state.nextPage}")
                     Log.d("main","${state.photos}")
-                    adapter.setPhotos(state.photos)
-                    isLoading = false
+                    adapter.addPhotos(state.photos)
+                    isLoading = state.isLoading
+                    isLastPage = state.nextPage == null
 
                 }
             }

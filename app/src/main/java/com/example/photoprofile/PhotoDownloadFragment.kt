@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.photoprofile.ui.dataclass.SrcUi
 import com.example.photoprofile.ui.viewmodel.PhotoDetailViewModel
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.getValue
@@ -20,7 +23,7 @@ import kotlin.getValue
 class PhotoDownloadFragment : Fragment() {
 
     private val viewModel: PhotoDetailViewModel by viewModel()
-    lateinit var imageUrl: String
+    lateinit var imageSrc: SrcUi
     var imageId: Long = 0
 
     override fun onCreateView(
@@ -39,32 +42,85 @@ class PhotoDownloadFragment : Fragment() {
 
             val action =
                 PhotoDownloadFragmentDirections
-                    .actionPhotoDownloadToFullScreen(imageUrl)
+                    .actionPhotoDownloadToFullScreen(imageSrc.portrait)
 
             findNavController().navigate(action)
         }
 
-        view.findViewById<Button>(R.id.buttonDownload).setOnClickListener {
+        val downloadBtn =
+            view.findViewById<ExtendedFloatingActionButton>(R.id.buttonDownload)
 
-            viewModel.downloadPhoto(requireContext(), imageUrl,imageId)
+        downloadBtn.setOnClickListener { view ->
 
-            lifecycleScope.launch {
-                viewModel.uiState.collect { state ->
+            val popup = PopupMenu(requireContext(), view)
+            popup.menuInflater.inflate(R.menu.download_menu, popup.menu)
 
-                    if (state.downloadSuccess) {
-                        Toast.makeText(context, "Downloaded Photo", Toast.LENGTH_SHORT).show()
+            popup.setOnMenuItemClickListener {
+
+                when (it.itemId) {
+
+                    R.id.download_original -> {
+                        viewModel.downloadPhoto(requireContext(), imageSrc.original,imageId,"original")
+                        true
                     }
 
-                    state.error?.let {
-                        Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                    R.id.download_large -> {
+                        viewModel.downloadPhoto(requireContext(), imageSrc.large,imageId,"large")
+                        true
                     }
+
+                    R.id.download_large2X -> {
+                        viewModel.downloadPhoto(requireContext(), imageSrc.large2x,imageId,"large2x")
+                        true
+                    }
+
+                    R.id.download_medium -> {
+                        viewModel.downloadPhoto(requireContext(), imageSrc.medium,imageId,"medium")
+                        true
+                    }
+
+                    R.id.download_small -> {
+                        viewModel.downloadPhoto(requireContext(), imageSrc.small,imageId,"small")
+                        true
+                    }
+                    R.id.download_portrait -> {
+                        viewModel.downloadPhoto(requireContext(), imageSrc.portrait,imageId,"portrait")
+                        true
+                    }
+
+                    R.id.download_landscape -> {
+                        viewModel.downloadPhoto(requireContext(), imageSrc.landscape,imageId,"landscape")
+                        true
+                    }
+
+                    R.id.download_tiny -> {
+                        viewModel.downloadPhoto(requireContext(), imageSrc.tiny,imageId,"tiny")
+                        true
+                    }
+
+                    else -> false
                 }
             }
 
+            popup.show()
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState.collect { state ->
+
+                if (state.downloadSuccess) {
+                    Toast.makeText(context, "Downloaded Photo", Toast.LENGTH_SHORT).show()
+                }
+
+                state.error?.let {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         return view
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -72,14 +128,11 @@ class PhotoDownloadFragment : Fragment() {
             PhotoDownloadFragmentArgs
                 .fromBundle(requireArguments())
 
-        imageUrl = args.imageUrl
+        imageSrc = args.imageSrc
         imageId = args.imageId
 
-        Log.d("main",imageUrl)
-        Log.d("main","$imageId")
-
         Glide.with(this)
-            .load(imageUrl)
+            .load(imageSrc.portrait)
             .into(view.findViewById(R.id.imageViewDownload))
     }
 }

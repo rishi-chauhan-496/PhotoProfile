@@ -1,5 +1,8 @@
 package com.example.photoprofile.ui.dataclass
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class PexelsResponseUi(
     val page: Int,
     val perPage: Int,
@@ -21,6 +24,7 @@ data class PhotoUi(
     val alt: String
 )
 
+@Parcelize
 data class SrcUi(
     val original: String,
     val large2x: String,
@@ -30,5 +34,5 @@ data class SrcUi(
     val portrait: String,
     val landscape: String,
     val tiny: String
-)
+): Parcelable
 

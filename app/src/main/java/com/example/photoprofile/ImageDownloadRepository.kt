@@ -15,7 +15,8 @@ class ImageDownloadRepository {
     suspend fun downloadAndSaveImage(
         context: Context,
         imageUrl: String,
-        fileName: Long
+        fileId: Long,
+        fileName: String
     ): Boolean  {
 
         try {
@@ -30,7 +31,7 @@ class ImageDownloadRepository {
             if (!appFolder.exists()) appFolder.mkdirs()
 
             val destinationFile =
-                File(appFolder, "image_${fileName}.jpg")
+                File(appFolder, "${fileId}_$fileName.jpg")
 
             val response = apiService.downloadImage(imageUrl)
 

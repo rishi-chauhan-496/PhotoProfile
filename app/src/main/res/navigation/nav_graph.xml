@@ -5,6 +5,13 @@
     app:startDestination="@id/photosFragment">
 
     <fragment
+        android:id="@+id/StorageFragment"
+        android:name="com.example.photoprofile.StorageFragment"
+        android:label="@string/storage" >
+
+    </fragment>
+
+    <fragment
         android:id="@+id/photosFragment"
         android:name="com.example.photoprofile.PhotosFragment"
         android:label="Photos">
@@ -40,8 +47,8 @@
         android:label="Download Photo">
 
         <argument
-            android:name="imageUrl"
-            app:argType="string" />
+            android:name="imageSrc"
+            app:argType="com.example.photoprofile.ui.dataclass.SrcUi" />
 
         <argument
             android:name="imageId"
