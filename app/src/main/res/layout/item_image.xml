@@ -7,31 +7,42 @@
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imgItem"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="300dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/image"
             android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/textViewPtoName"
-            android:layout_width="match_parent"
-            android:layout_height="18dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imgItem"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bottom_gradient"
+            android:gravity="bottom|start"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="10dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="Product Name"
+            app:layout_constraintStart_toStartOf="@id/imgItem"
+            app:layout_constraintEnd_toEndOf="@id/imgItem"
+            app:layout_constraintBottom_toBottomOf="@id/imgItem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
