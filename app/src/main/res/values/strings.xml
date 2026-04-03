@@ -23,6 +23,7 @@
     <string name="profile_header">Profile</string>
     <string name="edit_profile_header">Edit Profile</string>
     <string name="record_inserted">Record Inserted</string>
+    <string name="record_updated">Record Updated</string>
     <string name="special">Special</string>
     <string name="get_started">Get Started</string>
     <string name="explore_and_download_beautiful_photos">Explore and download beautiful photos</string>
@@ -39,4 +40,9 @@
     <string name="landscape">landscape</string>
     <string name="tiny">tiny</string>
     <string name="storage">Storage</string>
+    <string name="create_your_profile_to_get_started">Create your profile to get started</string>
+    <string name="no_profile_yet">No Profile data</string>
+    <string name="save">SAVE</string>
+
+    <string name="server_client_id">511546860204-62g151etncgnjcri6qhantvrvmolp1pd.apps.googleusercontent.com</string>
 </resources>

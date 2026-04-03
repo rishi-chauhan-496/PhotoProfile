@@ -1,24 +1,18 @@
-package com.example.photoprofile
+package com.example.photoprofile.data.repository
 
-import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Environment
 import android.util.Log
 import com.example.photoprofile.data.local.DownloadApiService
+import com.example.photoprofile.domain.model.DownloadImage
+import com.example.photoprofile.domain.repository.ImageDownloadRepository
 import java.io.File
 import java.io.FileOutputStream
 
-class ImageDownloadRepository {
-
+class ImageDownloadRepositoryImpl: ImageDownloadRepository {
     private val apiService = DownloadApiService.fileService
 
-    suspend fun downloadAndSaveImage(
-        context: Context,
-        imageUrl: String,
-        fileId: Long,
-        fileName: String
-    ): Boolean  {
-
+    override suspend fun downloadAndSaveImage(downloadImage: DownloadImage): Boolean {
         try {
             Log.d("main", "Starting Download")
 
@@ -31,9 +25,9 @@ class ImageDownloadRepository {
             if (!appFolder.exists()) appFolder.mkdirs()
 
             val destinationFile =
-                File(appFolder, "${fileId}_$fileName.jpg")
+                File(appFolder, "${downloadImage.fileId}_${downloadImage.fileName}.jpg")
 
-            val response = apiService.downloadImage(imageUrl)
+            val response = apiService.downloadImage(downloadImage.imageUrl)
 
             if (response.isSuccessful) {
 
@@ -44,7 +38,7 @@ class ImageDownloadRepository {
                 }
 
                 MediaScannerConnection.scanFile(
-                    context,
+                    downloadImage.context,
                     arrayOf(destinationFile.absolutePath),
                     arrayOf("image/jpeg"),
                     null

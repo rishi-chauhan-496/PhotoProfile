@@ -23,7 +23,7 @@
             android:id="@+id/emptyImage"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:src="@android:drawable/sym_def_app_icon"
+            android:src="@drawable/profile"
             android:scaleType="centerInside"
             android:layout_marginBottom="20dp"/>
 
@@ -31,7 +31,7 @@
             android:id="@+id/emptyTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Profile Yet"
+            android:text="@string/no_profile_yet"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
@@ -40,7 +40,7 @@
             android:id="@+id/emptySubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create your profile to get started"
+            android:text="@string/create_your_profile_to_get_started"
             android:textSize="16sp"
             android:gravity="center"
             android:textColor="#666666"
@@ -56,63 +56,149 @@
 
 
     <!-- ================= PROFILE DATA ================= -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Guideline for label alignment -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="131dp" />
+
+        <!-- Profile Header -->
         <TextView
             android:id="@+id/textHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Profile"
-            android:textSize="28sp"
+            android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_gravity="center"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
+        <!-- Profile Image -->
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="24dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginBottom="20dp"
             android:src="@android:drawable/sym_def_app_icon"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:clipToOutline="true"
+            app:layout_constraintTop_toBottomOf="@id/textHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- NAME -->
+        <TextView
+            android:id="@+id/labelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Name"
+            android:textColor="#666"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
 
         <TextView
             android:id="@+id/textViewName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/labelName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineLabel"
+            app:layout_constraintTop_toTopOf="@id/labelName" />
+
+        <!-- COUNTRY -->
+        <TextView
+            android:id="@+id/labelCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:text="Country"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:textColor="#666"
+            android:textSize="24sp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@id/labelName"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/textViewCountry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/labelCountry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineLabel"
+            app:layout_constraintTop_toTopOf="@id/labelCountry" />
+
+        <!-- EMAIL -->
+        <TextView
+            android:id="@+id/labelEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:text="Email"
+            android:textStyle="bold"
+            android:textColor="#666"
+            android:textSize="24sp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@id/labelCountry"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/textViewEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="18sp"
+            android:textStyle="italic"
+
+            app:layout_constraintBottom_toBottomOf="@+id/labelEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineLabel"
+            app:layout_constraintTop_toTopOf="@id/labelEmail" />
+
+        <!-- HOBBIES -->
+        <TextView
+            android:id="@+id/labelHobbies"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:text="Hobbies"
+            android:textStyle="bold"
+            android:textColor="#666"
+            android:textSize="24sp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@id/labelEmail"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/textViewHobbies"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"/>
+            android:layout_marginStart="8dp"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/labelHobbies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guidelineLabel"
+            app:layout_constraintTop_toTopOf="@id/labelHobbies" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

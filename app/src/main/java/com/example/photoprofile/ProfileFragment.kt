@@ -1,7 +1,6 @@
 package com.example.photoprofile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -34,7 +34,6 @@ class ProfileFragment : Fragment() {
     lateinit var imageView: ImageView
     lateinit var layoutEmpty: View
     lateinit var layoutProfile: View
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,7 +72,6 @@ class ProfileFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
 
-                    Log.d("PROFILE_DEBUG", "User is: ${state.user}")
 
                     if (state.user == null) {
 
@@ -105,7 +103,9 @@ class ProfileFragment : Fragment() {
         menuHost.addMenuProvider(object : MenuProvider {
 
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_profile, menu)
+                if(layoutEmpty.isGone) {
+                    menuInflater.inflate(R.menu.menu_profile, menu)
+                }
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

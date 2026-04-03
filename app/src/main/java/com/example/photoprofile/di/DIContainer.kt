@@ -2,17 +2,22 @@ package com.example.photoprofile.di
 
 import com.example.photoprofile.MainApplication
 import com.example.photoprofile.data.local.ProfileDataBase
-import com.example.photoprofile.ImageDownloadRepository
+import com.example.photoprofile.data.repository.ImageDownloadRepositoryImpl
+import com.example.photoprofile.data.repository.LoadImagesRepositoryImpl
 import com.example.photoprofile.data.repository.PexelsRepositoryImpl
 import com.example.photoprofile.data.repository.UserRepositoryImpl
+import com.example.photoprofile.domain.repository.ImageDownloadRepository
+import com.example.photoprofile.domain.repository.LoadImagesRepository
 import com.example.photoprofile.domain.repository.PexelsRepository
 import com.example.photoprofile.domain.repository.UserRepository
 import com.example.photoprofile.domain.usecase.GetCuratedPhotosUseCase
 import com.example.photoprofile.domain.usecase.GetUserUseCase
+import com.example.photoprofile.domain.usecase.ImageDownloadUseCase
+import com.example.photoprofile.domain.usecase.LoadImageUseCase
 import com.example.photoprofile.domain.usecase.SaveUserUseCase
 import com.example.photoprofile.domain.usecase.UpdateUserUseCase
 import com.example.photoprofile.ui.viewmodel.PhotoDetailViewModel
-//import com.example.photoprofile.ui.viewmodel.PhotoDetailViewModel
+import com.example.photoprofile.ui.viewmodel.PhotoLoadViewModel
 import com.example.photoprofile.ui.viewmodel.PhotosViewModel
 import com.example.photoprofile.ui.viewmodel.UserInfoViewModel
 import com.example.photoprofile.ui.viewmodel.UserViewModel
@@ -45,8 +50,6 @@ object DIContainer {
                 getCuratedPhotosUseCase = get()
             )
         }
-        //
-//        viewModel<PhotoDetailViewModel>()
         //
         single<ProfileDataBase> {
             ProfileDataBase(
@@ -87,11 +90,30 @@ object DIContainer {
         }
         //
         single<ImageDownloadRepository> {
-            ImageDownloadRepository()
+            ImageDownloadRepositoryImpl()
+        }
+        single<ImageDownloadUseCase> {
+            ImageDownloadUseCase(
+                repository = get()
+            )
         }
         viewModel<PhotoDetailViewModel> {
             PhotoDetailViewModel(
+                 imageDownloadUseCase = get()
+            )
+        }
+        //
+        single<LoadImagesRepository> {
+            LoadImagesRepositoryImpl()
+        }
+        single<LoadImageUseCase> {
+            LoadImageUseCase(
                 repository = get()
+            )
+        }
+        viewModel<PhotoLoadViewModel> {
+            PhotoLoadViewModel(
+                loadImageUseCase = get()
             )
         }
     }

@@ -28,7 +28,13 @@
         <TextView
             android:id="@+id/textViewPtoName"
             android:layout_width="match_parent"
-            android:layout_height="18dp"
+            android:layout_height="40dp"
+            android:paddingRight="12dp"
+            android:paddingLeft="12dp"
+            android:paddingBottom="10dp"
+            android:gravity="bottom"
+            android:background="@drawable/gradient_effect"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/imgItem"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 }
 
 val localProperties = Properties().apply {
@@ -107,4 +108,10 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.2.0")
     // MockK for Android tests
     androidTestImplementation("io.mockk:mockk-android:1.13.10")
+    //GOOGLE
+//    implementation(platform("com.google.firebase:firebase-bom:34.11.0"))
+//
+//    implementation("com.google.firebase:firebase-auth-ktx")
+//    implementation("com.google.firebase:firebase-analytics")
+//    implementation("com.google.android.gms:play-services-auth")
 }

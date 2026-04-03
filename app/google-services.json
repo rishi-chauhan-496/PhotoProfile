@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "757112234093",
+    "project_id": "logindemo-ad1d4",
+    "storage_bucket": "logindemo-ad1d4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757112234093:android:d75f4faf692254e42b1f64",
+        "android_client_info": {
+          "package_name": "com.example.photoprofile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757112234093-ok3j0ha46cf8fk35nr0i71j9fechnjaq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLdqQtgQPtWPetj3sYX100axLNWvzmFeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757112234093-ok3j0ha46cf8fk35nr0i71j9fechnjaq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

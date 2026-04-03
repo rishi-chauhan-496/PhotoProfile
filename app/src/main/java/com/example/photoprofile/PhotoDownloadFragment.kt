@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -50,63 +49,103 @@ class PhotoDownloadFragment : Fragment() {
         val downloadBtn =
             view.findViewById<ExtendedFloatingActionButton>(R.id.buttonDownload)
 
-        downloadBtn.setOnClickListener { view ->
-
-            val popup = PopupMenu(requireContext(), view)
-            popup.menuInflater.inflate(R.menu.download_menu, popup.menu)
-
-            popup.setOnMenuItemClickListener {
-
-                when (it.itemId) {
-
-                    R.id.download_original -> {
-                        viewModel.downloadPhoto(requireContext(), imageSrc.original,imageId,"original")
-                        true
-                    }
-
-                    R.id.download_large -> {
-                        viewModel.downloadPhoto(requireContext(), imageSrc.large,imageId,"large")
-                        true
-                    }
-
-                    R.id.download_large2X -> {
-                        viewModel.downloadPhoto(requireContext(), imageSrc.large2x,imageId,"large2x")
-                        true
-                    }
-
-                    R.id.download_medium -> {
-                        viewModel.downloadPhoto(requireContext(), imageSrc.medium,imageId,"medium")
-                        true
-                    }
-
-                    R.id.download_small -> {
-                        viewModel.downloadPhoto(requireContext(), imageSrc.small,imageId,"small")
-                        true
-                    }
-                    R.id.download_portrait -> {
-                        viewModel.downloadPhoto(requireContext(), imageSrc.portrait,imageId,"portrait")
-                        true
-                    }
-
-                    R.id.download_landscape -> {
-                        viewModel.downloadPhoto(requireContext(), imageSrc.landscape,imageId,"landscape")
-                        true
-                    }
-
-                    R.id.download_tiny -> {
-                        viewModel.downloadPhoto(requireContext(), imageSrc.tiny,imageId,"tiny")
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-
-            popup.show()
-        }
-
         lifecycleScope.launch {
             viewModel.uiState.collect { state ->
+
+                downloadBtn.setOnClickListener { view ->
+
+                    val popup = PopupMenu(requireContext(), view)
+                    popup.menuInflater.inflate(R.menu.download_menu, popup.menu)
+
+                    popup.setOnMenuItemClickListener {
+
+                        when (it.itemId) {
+
+                            R.id.download_original -> {
+                                viewModel.downloadPhoto(
+                                    requireContext(),
+                                    imageSrc.original,
+                                    imageId,
+                                    "original"
+                                )
+                                true
+                            }
+
+                            R.id.download_large -> {
+                                viewModel.downloadPhoto(
+                                    requireContext(),
+                                    imageSrc.large,
+                                    imageId,
+                                    "large"
+                                )
+                                true
+                            }
+
+                            R.id.download_large2X -> {
+                                viewModel.downloadPhoto(
+                                    requireContext(),
+                                    imageSrc.large2x,
+                                    imageId,
+                                    "large2x"
+                                )
+                                true
+                            }
+
+                            R.id.download_medium -> {
+                                viewModel.downloadPhoto(
+                                    requireContext(),
+                                    imageSrc.medium,
+                                    imageId,
+                                    "medium"
+                                )
+                                true
+                            }
+
+                            R.id.download_small -> {
+                                viewModel.downloadPhoto(
+                                    requireContext(),
+                                    imageSrc.small,
+                                    imageId,
+                                    "small"
+                                )
+                                true
+                            }
+
+                            R.id.download_portrait -> {
+                                viewModel.downloadPhoto(
+                                    requireContext(),
+                                    imageSrc.portrait,
+                                    imageId,
+                                    "portrait"
+                                )
+                                true
+                            }
+
+                            R.id.download_landscape -> {
+                                viewModel.downloadPhoto(
+                                    requireContext(),
+                                    imageSrc.landscape,
+                                    imageId,
+                                    "landscape"
+                                )
+                                true
+                            }
+
+                            R.id.download_tiny -> {
+                                viewModel.downloadPhoto(
+                                    requireContext(),
+                                    imageSrc.tiny,
+                                    imageId,
+                                    "tiny"
+                                )
+                                true
+                            }
+
+                            else -> false
+                        }
+                    }
+                    popup.show()
+                }
 
                 if (state.downloadSuccess) {
                     Toast.makeText(context, "Downloaded Photo", Toast.LENGTH_SHORT).show()
