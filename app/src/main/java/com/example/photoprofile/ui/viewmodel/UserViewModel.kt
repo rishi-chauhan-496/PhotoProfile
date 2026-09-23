@@ -21,15 +21,15 @@ class UserViewModel(
     val uiState: StateFlow<UserUiState> = _uiState
 
     fun onCredentialsChanges(
-        name: String,
-        email: String,
-        hobbies: String,
-        country: String
+        name: String?,
+        email: String?,
+        hobbies: String?,
+        country: String?
     ) {
-        val nameError = if (name.isEmpty()) "Name required" else null
-        val emailError = if (email.isEmpty()) "Email required" else null
-        val hobbiesError = if (hobbies.isEmpty()) "Hobbies required" else null
-        val countryError = if (country.isEmpty()) "Country required" else null
+        val nameError = if (name.isNullOrEmpty()) "Name required" else null
+        val emailError = if (email.isNullOrEmpty()) "Email required" else null
+        val hobbiesError = if (hobbies.isNullOrEmpty()) "Hobbies required" else null
+        val countryError = if (country.isNullOrEmpty()) "Country required" else null
 
         _uiState.value = _uiState.value.copy(
 
