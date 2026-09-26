@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/download_original"
+        android:title="@string/original" />
+
+    <item
+        android:id="@+id/download_large"
+        android:title="@string/large" />
+
+    <item
+        android:id="@+id/download_large2X"
+        android:title="@string/large2x" />
+
+    <item
+        android:id="@+id/download_medium"
+        android:title="@string/medium" />
+
+    <item
+        android:id="@+id/download_small"
+        android:title="@string/small" />
+
+    <item
+        android:id="@+id/download_portrait"
+        android:title="@string/portrait" />
+
+    <item
+        android:id="@+id/download_landscape"
+        android:title="@string/landscape" />
+
+    <item
+        android:id="@+id/download_tiny"
+        android:title="@string/tiny" />
+
+</menu>

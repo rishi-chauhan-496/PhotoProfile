@@ -7,8 +7,8 @@ import com.example.photoprofile.ui.dataclass.InsertUserInfoUi
 import com.example.photoprofile.ui.dataclass.UserInfoUi
 
 
-fun InsertUserInfo.toUi(): InsertUserInfoUi {
-    return InsertUserInfoUi(
+fun InsertUserInfoUi.toDomain(): InsertUserInfo {
+    return InsertUserInfo(
         name = name,
         email = email,
         photo = photo,
@@ -19,6 +19,17 @@ fun InsertUserInfo.toUi(): InsertUserInfoUi {
 
 fun UserInfo.toUi(): UserInfoUi {
     return UserInfoUi(
+        id = id,
+        name = name,
+        email = email,
+        photo = photo,
+        hobbies = hobbies,
+        country = country
+    )
+}
+
+fun UserInfoUi.toDomain(): UserInfo {
+    return UserInfo(
         id = id,
         name = name,
         email = email,

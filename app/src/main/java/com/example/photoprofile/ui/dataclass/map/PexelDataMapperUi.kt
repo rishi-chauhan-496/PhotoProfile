@@ -32,7 +32,6 @@ fun Photo.toUi(): PhotoUi {
         alt = alt
     )
 }
-
 fun Src.toUi(): SrcUi {
     return SrcUi(
         original = original,

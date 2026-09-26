@@ -7,9 +7,10 @@ import com.example.photoprofile.domain.repository.PexelsRepository
 
 class PexelsRepositoryImpl : PexelsRepository {
 
-    override suspend fun getPexelPhotos(): PexelsResponse {
-        return RetrofitInstance.api
-            .getPhotos()
-            .toDomain()
+    override suspend fun getPexelPhotos(page: Int): PexelsResponse {
+        val apiCall = RetrofitInstance.api
+            .getPhotos(page = page)
+
+        return apiCall.toDomain()
     }
 }

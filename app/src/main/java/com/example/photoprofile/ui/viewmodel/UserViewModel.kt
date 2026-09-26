@@ -2,18 +2,19 @@ package com.example.photoprofile.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.photoprofile.domain.model.InsertUserInfo
-import com.example.photoprofile.domain.model.UserInfo
 import com.example.photoprofile.domain.usecase.SaveUserUseCase
 import com.example.photoprofile.domain.usecase.UpdateUserUseCase
+import com.example.photoprofile.ui.dataclass.InsertUserInfoUi
+import com.example.photoprofile.ui.dataclass.UserInfoUi
+import com.example.photoprofile.ui.dataclass.map.toDomain
 import com.example.photoprofile.ui.uistate.UserUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class UserViewModel(
-private val saveUserUseCase: SaveUserUseCase,
-private val updateUserUseCase: UpdateUserUseCase
+    private val saveUserUseCase: SaveUserUseCase,
+    private val updateUserUseCase: UpdateUserUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UserUiState())
@@ -25,10 +26,11 @@ private val updateUserUseCase: UpdateUserUseCase
         hobbies: String?,
         country: String?
     ) {
-        val nameError = if (name == null) "Name required" else null
-        val emailError = if (email == null) "Email required" else null
-        val hobbiesError = if (hobbies == null) "Hobbies required" else null
-        val countryError = if (country == null) "Country required" else null
+        val nameError = if (name.isNullOrEmpty()) "Name required" else null
+        val emailError = if (email.isNullOrEmpty()) "Email required" else null
+        val hobbiesError = if (hobbies.isNullOrEmpty()) "Hobbies required" else null
+        val countryError = if (country.isNullOrEmpty()) "Country required" else null
+
         _uiState.value = _uiState.value.copy(
 
             nameError = nameError,
@@ -51,13 +53,13 @@ private val updateUserUseCase: UpdateUserUseCase
         viewModelScope.launch {
             runCatching {
                 saveUserUseCase(
-                    InsertUserInfo(
+                    InsertUserInfoUi(
                         name = name,
                         email = email,
                         photo = photo,
                         hobbies = hobbies,
                         country = country
-                    )
+                    ).toDomain()
                 )
             }.onFailure {
                 _uiState.value = _uiState.value.copy(
@@ -80,14 +82,14 @@ private val updateUserUseCase: UpdateUserUseCase
         viewModelScope.launch {
             runCatching {
                 updateUserUseCase(
-                    UserInfo(
+                    UserInfoUi(
                         id = userId,
                         name = name,
                         email = email,
                         photo = photo,
                         hobbies = hobbies,
                         country = country
-                    )
+                    ).toDomain()
                 )
             }.onFailure {
                 _uiState.value = _uiState.value.copy(

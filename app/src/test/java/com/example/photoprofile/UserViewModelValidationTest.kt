@@ -18,7 +18,7 @@ class UserViewModelValidationTest {
     fun setup() {
         sut = UserViewModel(
             saveUserUseCase = saveUserUseCase,
-            updateUserUseCase = updateUserUseCase
+            updateUserUseCase = updateUserUseCase,
         )
     }
 

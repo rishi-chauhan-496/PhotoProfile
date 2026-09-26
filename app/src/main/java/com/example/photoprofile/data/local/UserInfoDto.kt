@@ -16,4 +16,3 @@ class UserInfoDto(
      photo: String,
      hobbies: String,
      country: String) : InsertUserInfoDto(name, email, photo, hobbies, country )
-

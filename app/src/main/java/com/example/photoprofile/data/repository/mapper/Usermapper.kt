@@ -5,8 +5,8 @@ import com.example.photoprofile.data.local.UserInfoDto
 import com.example.photoprofile.domain.model.InsertUserInfo
 import com.example.photoprofile.domain.model.UserInfo
 
-fun InsertUserInfoDto.toDomain(): InsertUserInfo {
-    return InsertUserInfo(
+fun InsertUserInfo.toDto(): InsertUserInfoDto {
+    return InsertUserInfoDto(
         name = name,
         email = email,
         photo = photo,
@@ -17,6 +17,17 @@ fun InsertUserInfoDto.toDomain(): InsertUserInfo {
 
 fun UserInfoDto.toDomain(): UserInfo {
     return UserInfo(
+        id = id,
+        name = name,
+        email = email,
+        photo = photo,
+        hobbies = hobbies,
+        country = country
+    )
+}
+
+fun UserInfo.toDto(): UserInfoDto {
+    return UserInfoDto(
         id = id,
         name = name,
         email = email,

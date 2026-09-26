@@ -1,9 +1,13 @@
 package com.example.photoprofile.data.remote
 
+import com.google.gson.annotations.SerializedName
+
 data class PexelsResponseDto(
     val page: Int,
+    @SerializedName("per_page")
     val perPage: Int,
     val photos: List<PhotoDto>,
+    @SerializedName("next_page")
     val nextPage: String?
 )
 data class PhotoDto(

@@ -12,14 +12,13 @@ data class Photo(
     val height: Int,
     val url: String,
     val photographer: String,
-    val photographerUrl: String,
+    val photographerUrl: String?,
     val photographerId: Long,
-    val avgColor: String,
+    val avgColor: String?,
     val src: Src,
     val liked: Boolean,
     val alt: String
 )
-
 
 data class Src(
     val original: String,
